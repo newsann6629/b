@@ -13,15 +13,15 @@
                 </div>
             </div>
             <div class="card mt-3">
-                <div class="card-t-blue" v-for="sec in adminform" :key="sec.section_id">
+                <div class="card-t-blue mt-3" v-for="sec,i in adminform" :key="sec.section_id">
                     <div>
-                        <label for="" class="head">{{ sec.section }}</label>
+                        <label for="" class="head"> {{ i + 1 }} {{ sec.section }}</label>
                     </div>
-                    <div v-for="ind in sec.indicators" :key="ind.section_id">
+                    <div v-for="ind,j in sec.indicators" :key="ind.section_id">
                       <div>
-                        <label for="" class="text-2xl">{{ ind.indicator }}</label>
+                        <label for="" class="text-2xl"> {{ i + 1  }} . {{ j + 1 }} {{ ind.indicator }}</label>
                       </div>
-                      <div>
+                      <div class="px-16">
                         <label for="">{{ ind.detail }}</label>
                       </div>
                     </div>
@@ -109,7 +109,7 @@
 <script setup>
 import { adminauth } from '#imports';
 
-const {addsec,getsec,addform,getindicator} = adminauth()
+const {addsec,getsec,addform,getindicator,delindicator} = adminauth()
 
 const form = ref({
     section_id: "",

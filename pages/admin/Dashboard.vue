@@ -43,6 +43,7 @@ import { useUserStore } from '#imports';
 const store = useUserStore()
 const go = useRouter()
 
+
 function logout(){
     store.Logout()
     go.push("/")

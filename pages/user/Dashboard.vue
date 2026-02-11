@@ -14,9 +14,11 @@
                         <nuxt-link to="/user/Dashboard/" class="text-white">หน้าแรก</nuxt-link>
                     </div>
                     <div class="mt-3 px-3">
-                        <nuxt-link to="/user/Dashboard/" class="text-white">แก้ไขโปรไฟล์</nuxt-link>
+                        <nuxt-link to="/user/Dashboard/profile" class="text-white">แก้ไขโปรไฟล์</nuxt-link>
                     </div>
-                    
+                    <div class="mt-3 px-3">
+                        <nuxt-link to="/user/Dashboard/result" class="text-white">สรุปการประเมิน</nuxt-link>
+                    </div>
                 </div>
             </div>
             <div class="flex-1 overflow-y-auto">
@@ -31,11 +33,14 @@ import { useUserStore } from '#imports';
 
 const store = useUserStore()
 const go = useRouter()
-
 function logout(){
     store.Logout()
     go.push("/")
 }
+
+onMounted(() => {
+    store.LoadUser()
+})
 </script>
 
 <style lang="scss" scoped>

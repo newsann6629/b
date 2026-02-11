@@ -57,24 +57,31 @@
     </div>
   </div>
 </template>
-
-
 <script setup>
-import { adminauth } from '#imports';
-import { userauth } from '../../../composables/user';
+import { userauth } from '#imports';
 
-const usre = ref("")
+const { getresult,gettime } = userauth()
+
+const user = ref([])
+
+const result = ref([])
 const time = ref([])
-const { getresult } = adminauth()
-const { gettime } = userauth()
-const loaddata = async() =>{
-  const t = await gettime()
-  time.value = t[0]
-  const r = await getresult(time.value)
-  console.log(r)
-}
+// const map = (user,board,noboard) => {
+//     const epMap = {}
 
-  onMounted(() => {
-    loaddata()
-  })
+
+//     user.forEach(u => {
+        
+//     });
+// }
+
+const loaddata = async() => {
+    const t = await gettime()
+    time.value = t[0]
+    result.value = await getresult(time.value)    
+};
+
+onMounted(() => {
+  loaddata();
+});
 </script>

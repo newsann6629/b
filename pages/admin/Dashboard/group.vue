@@ -26,6 +26,20 @@
                 </div>
             </div>
             </form>
+
+            <div class="card">
+                <div class="grid grid-cols-9 gap-4">
+                    <div class="card-t-blue w-full text-center" v-for="b in boardsign" :key="b.id" @click="delbsign(b.id)">
+                        <div>
+                            <label for="">{{ b.username }}</label>
+                        </div>
+                        <div>
+                            <label for="">{{ b.role }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
         </div>
     </div>
 </template>
@@ -33,16 +47,18 @@
 <script setup>
 import { adminauth } from '#imports';
 
-const { getuser,bsign } = adminauth()
+const { getuser,bsign,getbsign,delbsign } = adminauth()
 const user = ref([])
 const formref = ref(null)
+const boardsign = ref([])
 const group = ref([])
 const test = () =>{
     console.log(group.value)
 }
 const loaddata = async() => {
     user.value = await getuser()
-    console.log(user.value)
+    boardsign.value = await getbsign()
+    console.log(boardsign.value)
 }
 
 onMounted(() => {

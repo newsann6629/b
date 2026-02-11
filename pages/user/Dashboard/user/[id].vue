@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-blue-200 min-h-screen">
-        <div class="flex justify-center items-center w-screen h-screen">
+    <div class="">
+        <div class="flex justify-center w-screen h-screen">
             <div v-if="form.length >= 1" class="">
                 <div>
                     <label for="" class="head border-l-blue">แบบฟอร์มสำหรับกรรมการ</label>
@@ -35,10 +35,24 @@
                             </div>
                         </div>
 
+                        <div v-for="s in ind.scores" :key="s.indicator_id">
+                            <div>
+                                <label for="" class="label">คะแนนการประเมินตัวเอง</label>
+                            </div>
+                            <div>
+                                <label for="" class="">{{ s.score }}</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <button type="submit" class="btn-blue" @click="sentform(score,files,time)">
+                    <input type="text" name="" v-model="comment" placeholder="comment" id="" class="input-field">
+                </div>
+                <div class="mt-3">
+                    <input type="file" name="" id="" @change="onchange($event)" class="input-field">
+                </div>
+                <div class="mt-3">
+                    <button type="submit" class="btn-blue" @click="sentbform(score,files,time,comment,uid)">
                         ส่งแบบประเมิน
                     </button>
                 </div>
@@ -55,34 +69,50 @@
 <script setup>
 import { userauth } from '#imports'
 
-const { gettime,getform,sentform } = userauth()
+const { gettime,getbform,sentbform } = userauth()
 const time = ref({})
 const form = ref([])
 
-const score = ref({})
 const files = ref({})
+const comment = ref("")
+const score = ref({})
 
-const test = () => {
+const test =() =>{
     console.log(files.value)
 }
 
-const mapdata = (section,form) => {
+function onchange(e){
+    files.value = e.target.files[0]
+}
+
+const route = useRoute()
+const uid = route.params.id
+
+const mapdata = (section,form,score) => {
     const epMap = {}
 
     form.forEach(f => {
         epMap[f.section_id] = {...f,indicators:[]}
     });
     section.forEach(sec => {
-        epMap[sec.section_id]?.indicators.push({...sec})
+        epMap[sec.section_id]?.indicators.push({...sec,scores:[]})
     });
+    score.forEach(s => {
+        Object.values(epMap).forEach(score => {
+            score.indicators.find(i => (i.indicator_id == s.indicator_id))
+            ?.scores.push({...s})
+        });
+    });
+
     return Object.values(epMap)
 }
 
 const loaddata = async() => {
     const t = await gettime()
     time.value = t[0]
-    const res = await getform(time.value)
-    form.value = mapdata(res[1],res[0])
+    const res = await getbform(uid,time.value)
+    form.value = mapdata(res[1],res[0],res[2])
+    console.log(form.value)
 }
 
 onMounted(() => {

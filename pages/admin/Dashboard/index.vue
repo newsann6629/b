@@ -16,6 +16,17 @@
                 </div>
                 </div>
             </form>
+
+            <div class="card mt-3" v-if="usersign.length >= 1">
+                <div class="grid grid-cols-5 gap-4">
+                    <div class="card-t-blue w-full text-center" v-for="u in usersign" :key="u.id" @click="delusign(u.id)">
+                        <div>
+                            <label for="" class="label">{{ u.username }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
         </div>
     </div>
 </template>
@@ -23,13 +34,15 @@
 <script setup>
 import { adminauth } from '#imports'
 
-const { getuser,usign } = adminauth()
+const { getuser,usign,getusign,delusign } = adminauth()
 const user = ref([])
+const usersign = ref([])
 const uid = ref("")
 const formref = ref(null)
 const loaddata = async() => {
     user.value = await getuser()
-    console.log(user.value)
+    usersign.value = await getusign()
+    console.log(usersign.value)
 }
 
 onMounted(() => {

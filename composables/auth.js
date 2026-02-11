@@ -23,9 +23,31 @@ export const useauth = () => {
         }
     })
 
-    
+    const register = async (data) => {
+    try {
+        const res = await http.post("auth/register", {
+            username: data.username,
+            password: data.password,
+            czid: data.czid,
+            salary: data.sal,
+            birthday: data.date,
+            phone: data.phone,
+            email: data.email,
+            department: data.department,
+            level: data.level,
+            position: data.position
+        })
+        alert("สำเร็จ")
+        login(data.email,data.password)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
 
     return {
         login,
+        register
     }
 }

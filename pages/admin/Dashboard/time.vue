@@ -5,30 +5,18 @@
                 <label for="" class="border-l-blue font-bold text-3xl">กำหนดระยะเวลาการประเมิน</label>
             </div>
             <div class="card">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="card-t-blue">
+                <div class="card-t-blue">
                         <div>
-                            <label for="">การประเมินรอบที่1</label>
                             <div class="mt-3">
+                                <label for="">เริ่ม</label>
                                 <input type="datetime-local" name="" id="" class="input-field">
                             </div>
                             <div class="mt-3">
+                                <label for="">ปิด</label>
                                 <input type="datetime-local" name="" id="" class="input-field">
                             </div>
                         </div>
                     </div>
-                    <div class="card-t-blue">
-                        <div>
-                            <label for="">การประเมินรอบที่2</label>
-                        </div>
-                        <div class="mt-3">
-                            <input type="datetime-local" name="" id="" class="input-field">
-                        </div>
-                        <div class="mt-3">
-                            <input type="datetime-local" name="" id="" class="input-field">
-                        </div>
-                    </div>
-                </div>
                 <div>
                     <button type="submit" class="btn-blue mt-3">
                         บันทึก
@@ -40,6 +28,26 @@
 </template>
 
 <script setup>
+import { adminauth } from '../../../composables/admin';
+
+const { gettime } = adminauth()
+
+const start = ref("")
+const expire = ref("")
+
+const TH = (datestr) => {
+  if (!datestr) return ""
+  return new Date(datestr).toLocaleDateString("th-TH")
+}
+
+const loaddata = async() => {
+    const t = gettime()
+    console.log(t.value)
+}
+
+onMounted(() => {
+    loaddata()
+})
 
 </script>
 

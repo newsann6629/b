@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-blue-200 min-h-screen">
-        <div class="flex justify-center items-center w-screen h-screen">
+    <div class="">
+        <div class="flex justify-center w-screen h-screen">
             <div v-if="form.length >= 1" class="">
                 <div>
                     <label for="" class="head border-l-blue">แบบฟอร์มประเมินตนเอง</label>
@@ -36,7 +36,7 @@
                         </div>
 
                         <div v-if="ind.freq == '1'" class="mt-3">
-                            <input type="file" name="" @change="e => onchange(e,ind.indicator_id)" id="" class="input-field">
+                            <input type="file" name="" @change="e => onchange(e, ind.indicator_id)" id="" class="input-field">
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@ const time = ref({})
 const form = ref([])
 
 const score = ref({})
-const files = ref({})
+const files = ref([])
 
 const test = () => {
     console.log(files.value)
