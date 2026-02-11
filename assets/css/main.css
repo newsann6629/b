@@ -1,0 +1,23 @@
+.card{
+    @apply bg-white rounded-md shadow-lg p-6
+}.model-overlay{
+    @apply z-50 inset-0 fixed flex justify-center items-center bg-black/50
+}.btn-blue{
+    @apply border rounded-md px-2.5 py-3 bg-blue-600 hover:bg-blue-800 text-white transition-colors duration-200 w-full shadow-md
+}.btn-red{
+    @apply border rounded-md px-2.5 py-3 bg-red-600 hover:bg-red-800 text-white transition-colors duration-200 w-full shadow-md
+}.btn-yellow{
+    @apply border rounded-md px-2.5 py-3 bg-yellow-600 hover:bg-yellow-800 text-white transition-colors duration-200 w-full shadow-md
+}.btn-green{
+    @apply border rounded-md px-2.5 py-3 bg-green-600 hover:bg-green-800 text-white transition-colors duration-200 w-full shadow-md
+}.input-field{
+    @apply border rounded-md px-2.5 py-3 focus:ring-2 focus:ring-blue-600 outline-none w-full shadow-md
+}.border-l-blue{
+    @apply border-l-8 border-blue-600 px-3
+}.label {
+    @apply text-gray-500
+}.card-t-blue{
+    @apply bg-white border-t-4 rounded-md border-blue-600 shadow-lg p-6
+}.head{
+    @apply text-3xl font-bold
+}
